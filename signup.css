@@ -1,0 +1,374 @@
+
+/* ==========================================================================
+   1. ROOT VARIABLES & THEMES (Light Mode Default / Dark Mode Overrides)
+   ========================================================================== */
+:root {
+    --bg-workspace: #f0f2f5;
+    --bg-card: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --border-color: #dddddd;
+    --accent-color: #1a73e8;
+    --accent-hover: #1557b0;
+    --input-bg: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --bg-workspace: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #f5f5f5;
+    --text-muted: #aaaaaa;
+    --border-color: #444444;
+    --accent-color: #8ab4f8;
+    --accent-hover: #aecbfa;
+    --input-bg: #2d2d2d;
+}
+
+/* ==========================================================================
+   2. GLOBAL BODY & APP WRAPPER SETUP
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: burlywood;
+    color: var(--text-main);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    min-height: 100vh;
+}
+
+.workspace-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   3. THE MASTER CARD BOX & HEADER INTERFACES
+   ========================================================================== */
+.unified-card-box {
+    background-color: rgb(155 , 89 ,89);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 960px;
+    overflow: hidden;
+    transition: background-color var(--transition-speed);
+}
+
+/* Top Navigation Bar */
+.card-header-nav {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.centered-nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.nav-link {
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: capitalize;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Utility Layout Theme Action Control */
+.theme-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color var(--transition-speed);
+}
+
+.theme-btn:hover {
+    background-color: var(--border-color);
+}
+
+/* ==========================================================================
+   4. SPLIT SIDE CONTENT BLOCKS (Flex Grid System Configuration)
+   ========================================================================== */
+.card-split-body {
+    display: flex;
+    min-height: 500px;
+}
+
+/* Left Column Display & Aesthetic Panels */
+.left-pane {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--border-color);
+}
+
+.brand-branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.brand-branding h1 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.welcome-text {
+    font-size: 1.1rem;
+    color: black;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.pane-hero-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Right Column Form Elements Panel */
+.right-pane {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-pane h3 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   5. INTERACTIVE FORM GROUP INPUT TYPES & GLOBAL CONTROLS
+   ========================================================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: black;
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition-speed);
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-color);
+}
+
+/* Interactive Control Groups Alignment Rules */
+.form-controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 0.9rem;
+}
+/* Container that locks the layout on a single line */
+.form-checkbox-row {
+    display: flex;
+    align-items: center;       /* Centers checkbox and text vertically */
+    gap: 8px;                  /* Creates standard spacing between elements */
+    margin: 15px 0;            /* Adds uniform margins above and below */
+    white-space: nowrap;       /* Strictly prevents text wrapping onto a new line */
+}
+
+/* Explicit standard sizes for the input node */
+.form-checkbox-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;                 /* Clears default browser padding variations */
+    flex-shrink: 0;            /* Prevents the checkbox from squeezing down */
+    cursor: pointer;
+}
+
+/* Direct inline text attributes styling definitions */
+.form-checkbox-row label {
+    font-size: 0.9rem;
+    color: black;
+    cursor: pointer;           /* Clicking text activates target check node */
+}
+
+
+.remember-me-group,
+.terms-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.remember-me-group input,
+.terms-group input {
+    cursor: pointer;
+}
+
+.forgot-password-btn {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+}
+
+.forgot-password-btn:hover {
+    color: var(--accent-hover);
+}
+
+/* Submission Actions */
+.submit-btn {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color var(--transition-speed);
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Link Actions Styles */
+.right-pane a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.right-pane a:hover {
+    text-decoration: underline;
+}
+
+/* Social Icon Blocks Configuration */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    font-size: 1.4rem;
+    color: var(--text-muted);
+}
+
+.social-icons i {
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+.social-icons i:hover {
+    color: var(--accent-color);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MEDIA GRID CONTROLS (Mobile Scaling Logic overrides)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .card-split-body {
+        flex-direction: column;
+    }
+    
+    /* Modified Left Column Layout Wrapper */
+.left-pane {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the whole card vertically */
+    align-items: center;
+    border-right: 1px solid var(--border-color);
+}
+
+/* Inner content wrapper to keep items tight and aligned together */
+.left-content-wrapper {
+    width: 100%;
+    max-width: 360px; /* Limits the container width to keep it neat */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Directly controls the tight spacing between elements */
+}
+
+.brand-branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0; /* Reset margins */
+}
+
+.brand-branding h1 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.welcome-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 5px; /* Tightly spaces items before the image */
+    font-weight: 500;
+}
+
+.pane-hero-image {
+    width: 100%;
+    height:800px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+}

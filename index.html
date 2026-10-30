@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL booking</title>
+    <!-- EXTERNAL STYLESHEET LINK -->
+    <link rel="stylesheet" href="login.css">
+    <script src="https://kit.fontawesome.com/6a518496c2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- NAV BAR INFRASTRUCTURE MODULE -->
+    <header>
+    <body>
+<div class="workspace-wrapper">
+    <main class="unified-card-box">
+        
+        <header class="card-header-nav">
+            <nav class="centered-nav">
+                <a href="#home.html" class="nav-link"></a>
+                <a href="#explore.html" class="nav-link">explore</a>
+                    <a href="#payment.html" class="nav-link">payment</a>
+                        <a href="#card.html" class="nav-link"></a>
+            </nav>
+            <button class="theme-btn" id="">
+<a href="signup.html" class="nav-link">signup</a>
+            </button>
+      
+        </header>
+
+        <div class="card-split-body">
+            <section class="left-pane">
+                <div class="brand-branding">
+                    <img src="haven_stays_logo/screen.png" width="30" alt="Logo">
+                    <h1>HOTEL BOOKING</h1>
+                </div>
+                <p class="welcome-text">WELCOME TO OUR PAGE</p>
+                <img class="pane-hero-image" src="view.jpg" alt="Hotel Feature Room View">
+            </section>
+
+            <aside class="right-pane" id="contact">
+                <h3>Log In Details</h3>
+                <form id="interactive-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="username">Name</label>
+                        <input id="nameInput" type="text" placeholder="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="useremail">Email Address</label>
+                        <input id="emailInput" type="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="userpassword">Password</label>
+                        <input id="passwordInput" type="password" placeholder="password">
+                    
+                    <!-- NEW: Remember Me & Forgot Password Row -->
+                    <div class="form-controls-row">
+                        <label class="remember-me-group" for="remember-me">
+                            <input type="checkbox" id="remember-me" name="remember">
+                            <span>Remember Password</span>
+                        </label>
+                        <a href="#" id="forgotPasswordLink" style="color:#0d6efd; cursor:pointer; text-decoration:underline;">Forgot Password?</a> 
+                    </div>
+ <button id="loginBtn">login</button>
+                    
+                    
+                    <div class="social-icons">
+                        <i class="fa-brands fa-google"></i>
+                        <i class="fa-brands fa-square-whatsapp"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                       
+
+                        </nav>
+                    </div>
+                </form>
+            </aside>
+        </div>
+    </main>
+</div>
+<script type="module">
+import { auth } from "./config.js";
+import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
+  import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+  import { auth } from "./config.js";
+
+  document.getElementById('forgotPasswordLink').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = document.querySelector('input[type="email"]').value || prompt("Enter your email:");
+    if(!email) return;
+    try{
+      await sendPasswordResetEmail(auth, email);
+      alert("✅ Email sent to " + email + " - check inbox!");
+    }catch(err){
+      alert(err.message);
+    }
+  });
+const loginBtn = document.getElementById("loginBtn");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+
+loginBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    localStorage.setItem("userEmail", user.email);
+    localStorage.setItem("userId", user.uid);
+    localStorage.setItem("isLoggedIn", "true");
+    
+    alert("Login successful!");
+    window.location.href = "explore.html";
+
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+});
+</script>
+
+<script type="module" src="./auth/signin.js"></script>
+ 
+</body>
+</html>

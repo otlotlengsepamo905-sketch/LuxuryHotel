@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitality Metrics Dashboard</title>
+    <!-- Linking external style rulesheet -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- SIDEBAR STYLES -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Sanctuary Engine</h2>
+        </div>
+        <nav class="menu">
+            <span class="menu-label">DASHBOARDS</span>
+            <a href="#" class="menu-item active">Yield & Inventory</a>
+            <a href="#" class="menu-item">Property Catalog</a>
+            <a href="#" class="menu-item">Reservations</a>
+        </nav>
+        <div class="status">
+            <span>● Production Node Active</span>
+        </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD WINDOW -->
+    <main class="main-content">
+        <header class="header">
+            <div>
+                <span class="breadcrumb">Portfolio Overview / Yield Matrix</span>
+                <h1>Live Inventory Allocation</h1>
+                <p>Click status to toggle availability. Drag rows to prioritize list stack.</p>
+            </div>
+        </header>
+
+        <!-- STANDALONE DYNAMIC METRIC BOXES -->
+        <section class="metrics-grid">
+            <div class="card">
+                <span class="card-title">TOTAL ROOM</span>
+                <input type="text" class="editable-metric" id="metric-total-rooms" value="10" readonly>
+                <p>Configured portfolio units</p>
+            </div>
+            <div class="card">
+                <span class="card-title">AVAILABLE BEDS</span>
+                <div style="display: flex; align-items: baseline;">
+                    <span style="font-size:1.8rem; font-weight:bold;">🛏️&nbsp;</span>
+                    <input type="text" class="editable-metric" id="metric-available-beds" value="0">
+                </div>
+                <p>Active guest capacity</p>
+            </div>
+            <div class="card">
+                <span class="card-title">OCCUPIED</span>
+                <input type="text" class="editable-metric" id="metric-occupied" value="0">
+                <p id="occupancy-text">0% Allocation Rate</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="occupancy-progress"></div>
+                </div>
+            </div>
+            <div class="card">
+                <span class="card-title">ACTIVE REV</span>
+                <div style="display: flex; align-items: baseline;">
+                    <span style="font-size: 1.8rem; font-weight: bold; color: var(--accent-orange);">R&nbsp;</span>
+                    <input type="text" class="editable-metric" id="metric-active-rev" value="0" style="color: var(--accent-orange);">
+                </div>
+                <p>Blended active row rate metrics</p>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="table-header">
+                <h3>Configured Suites <span class="badge" id="row-count-badge">3 displayed</span></h3>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ROOM & SUITE DETAILS</th>
+                        <th>CATEGORY & SPACE</th>
+                        <th>ACTIVE BASE / SURGE</th>
+                        <th>INVENTORY STATE</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Row 1 -->
+                    <tr draggable="true" data-beds="2">
+                        <td>
+                            <strong>Deluxe Sea View Suite</strong><br>
+                            <small>Monastero Santa Rosa • Amalfi Coast</small>
+                        </td>
+                        <td>Cliffside Suite<br><small>King Bed • Up to 2 Guests</small></td>
+                        <td>
+                            <input type="number" class="price-input" value="920">
+                            <span class="old-price">R800</span>
+                        </td>
+                        <td><span class="status-indicator available">Available</span></td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr draggable="true" data-beds="2">
+                        <td>
+                            <strong>Monastery Heritage Suite</strong><br>
+                            <small>Monastero Santa Rosa • Amalfi Coast</small>
+                        </td>
+                        <td>Historic Salon<br><small>Super King • 2 Guests</small></td>
+                        <td>
+                            <input type="number" class="price-input" value="1150">
+                            <span class="old-price">R1,000</span>
+                        </td>
+                        <td><span class="status-indicator available">Available</span></td>
+                    </tr>
+                    <!-- Row 3 -->
+                    <tr draggable="true" data-beds="4">
+                        <td>
+                            <strong>Sunset Panorama Villa</strong><br>
+                            <small>Monastero Santa Rosa • Amalfi Coast</small>
+                        </td>
+                        <td>Private Terrace<br><small>2x Double Beds • Up to 4 Guests</small></td>
+                        <td>
+                            <input type="number" class="price-input" value="1850">
+                            <span class="old-price">R1,600</span>
+                        </td>
+                        <td><span class="status-indicator maintenance">Maintenance</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Linking external functional runtime logic -->
+    <script src="admin.js"></script>
+</body>
+</html>

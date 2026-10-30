@@ -1,0 +1,224 @@
+
+  /* Base Themes Configuration */
+:root[data-theme="light"] { 
+    --bg: #eef2f7; 
+    --text: #333333; 
+    --card-bg: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+}
+:root[data-theme="dark"] { 
+    --bg: #121212; 
+    --text: #ffffff; 
+    --card-bg: #1e1e1e;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body { 
+    background-color: rgb(139, 139, 173); 
+    background-image: url(night.jpg);
+    color: var(--text); 
+    font-family: system-ui, -apple-system, sans-serif; 
+    margin: 0; 
+    padding: 0;
+    transition: background 0.3s; 
+}
+
+/* Centers the whole layout window */
+.workspace-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Master Component Box */
+.unified-card-box {
+    background: rgb(146, 124, 124);
+
+    width: 100%;
+    max-width: 900px; /* Wider footprint to fit side-by-side elements gracefully */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* Header Navbar: Navigation Center Structure */
+.card-header-nav {
+    display: flex;
+    justify-content: center; /* Centers items inside flex container context */
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.centered-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #007BFF;
+}
+
+.theme-btn {
+    position: absolute;
+    right: 0;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: inherit;
+}
+
+/* Flex Split-Screen Engine */
+.card-split-body {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+}
+
+/* Left Pane Details */
+.left-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-branding h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.welcome-text {
+    margin: 5px 0 15px 0;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.pane-hero-image {
+    width: 100%;
+    flex-grow: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    min-height: 250px;
+    background-color: #ddd;
+}
+
+/* Right Pane Details */
+.right-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-pane h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+/* Essential base layout for the new control elements */
+        .form-controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        .remember-me-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .forgot-password-btn {
+            background: none;
+            border: none;
+            color: #0066cc;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            font-size: inherit;
+        }
+        #form-feedback {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+.form-group input, .form-group textarea {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font-size: 0.95rem;
+}
+
+ .loginBtn{
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.loginBtn {
+    background: #0056b3;
+}
+
+/* Responsive Handling: Collapse layout neatly on smaller displays */
+@media (max-width: 768px) {
+    .card-split-body {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .pane-hero-image {
+        height: 200px;
+    }
+}
+
+/* LOGIN BUTTON ONLY */
+#loginBtn{
+    width:100%;
+    padding: 13px;
+    background: linear-gradient(135deg , #0066cc);
+    color: #e1e4e7;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px}

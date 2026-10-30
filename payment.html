@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Stays - Operations HQ</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+<script src="payment.js" defer></script>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo"><img src="haven_stays_logo/screen.png" width="30">
+            <h2>HOTEL BOOKING</h2>
+            <small>OPERATIONS HQ</small>
+        </div>
+        <nav class="menu">
+           <nav class="vertical-nav-container">
+  
+  <div class="nav-box">
+    <span class="nav-label">home</span>
+    <a href="home.html" class="nav-btn">Go Home</a>
+  </div>
+
+  
+  <div class="nav-box">
+    <span class="nav-label">explore</span>
+    <a href="explore.html" class="nav-btn">Discover</a>
+  </div>
+
+  <div class="nav-box">
+    <span class="nav-label">payment</span>
+    <a href="payment.html" class="nav-btn">Pay Now</a>
+  </div>
+
+  <div class="nav-box">
+    <span class="nav-label">card</span>
+    <a href="card.html" class="nav-btn">View Card</a>
+  </div>
+
+</nav>
+ 
+        </nav>
+        <div class="status">System Live</div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- HEADER -->
+        <header class="header">
+            <div>
+                <span class="breadcrumb">OPERATIONAL COMMAND / ROOM INVENTORY & PRICING</span>
+                <h1>Sanctuary Inventory & Live Pricing Engine</h1>
+                <p>Manage room categories, real-time availability states, surge multipliers, and seasonal rate allocations.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary">Bulk Rate Adjustments</button>
+                <button class="btn btn-primary">+ Add New Room / Suite</button>
+            </div>
+        </header>
+
+        <!-- METRICS ROW -->
+        <section class="metrics-grid">
+            <div class="card">
+                <span class="card-title">TOTAL CATALOG</span>
+                <h3>148 Units</h3>
+                <p>Across 48 curated sanctuaries</p>
+            </div>
+            <div class="card">
+                <span class="card-title">ACTIVE BOOKABLE</span>
+                <h3>92.4%</h3>
+                <p>Available & instant booking on direct</p>
+            </div>
+            <div class="card">
+                <span class="card-title">ADR BENCHMARK</span>
+                <h3>R840/nt</h3>
+                <p>Base blended yield portfolio-wide</p>
+            </div>
+            <div class="card highlight-card">
+                <span class="card-title">ACTIVE ALGORITHMIC SURGE</span>
+                <h3>+15% Active</h3>
+                <p>Autumn Foliage Peak Allocation</p>
+            </div>
+        </section>
+
+        <!-- TABLE SECTION -->
+        <section class="table-section">
+            <div class="table-header">
+                <h3>Configured Suites <span class="badge">10 displayed</span></h3>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ROOM & SUITE DETAILS</th>
+                        <th>CATEGORY & SPACE</th>
+                        <th>ACTIVE BASE / SURGE</th>
+                        <th>INVENTORY STATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Deluxe Sea View Suite</strong><br>
+                            <small>Monastero Santa Rosa • Amalfi Coast</small>
+                        </td>
+                        <td>Cliffside Suite<br><small>King Bed • Up to 2 Guests</small></td>
+                        <td><strong>R920</strong> <span class="old-price">R800</span></td>
+                        <td><span class="status-indicator available">Available • 3 left</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Monastery Heritage Suite</strong><br>
+                            <small>Monastero Santa Rosa • Amalfi Coast</small>
+                        </td>
+                        <td>Historic Salon<br><small>Super King • 2 Guests</small></td>
+                        <td><strong>R1,150</strong> <span class="old-price">R1,000</span></td>
+                        <td><span class="status-indicator critical">Critical Scarcity • 1 left</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+<script type="module">
+  import { saveData } from "./db/javaScript.js/db.js";
+
+  const selected = JSON.parse(localStorage.getItem("selectedRoom"));
+  console.log("Selected:", selected);
+
+  if (selected) {
+    // Show it on payment page
+    // e.g. document.getElementById("roomName").textContent = selected.name;
+  }
+
+  // When user clicks Pay Now
+  const payBtn = document.querySelector(".pay-now, #payBtn, [class*=Pay]");
+  if (payBtn) {
+    payBtn.addEventListener("click", async () => {
+      const booking = {
+        place: selected.name,
+        service: selected.place,
+        price: selected.price,
+        date: new Date().toISOString().split('T')[0],
+        email: "guest@test.com", // get from input
+        status: "pending",
+        createdAt: new Date()
+      };
+      const id = await saveData("bookings", booking);
+      alert(`Booked ${selected.name} for R${selected.price}/nt! ID: ${id}`);
+    });
+  }
+</script>
+</body>
+</html>

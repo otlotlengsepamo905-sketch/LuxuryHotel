@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Stays Booking</title>
+    <link rel="stylesheet" href="card.css">
+</head>
+<body>
+
+    <!-- CENTRAL WORKSPACE LAYER -->
+    <div class="workspace-wrapper">
+
+        <!-- THE MASTER DASHBOARD BOX -->
+        <main class="unified-voucher-box">
+
+            <!-- MODULE 1: INTERACTIVE NAVIGATION (Centered Inside the Box) -->
+            <header class="card-header-nav">
+                <img src="haven_stays_logo/screen.png" width="30">
+                <div class="logo">hotel booking</div>
+                <nav class="centered-nav">
+                    <a href="home.html" class="nav-link"></a>
+                    <a href="banking.html" class="nav-link"></a>
+                    <a href="explore.html" class="nav-link"></a>
+                    <a href="payment.html" class="nav-link"></a>
+                    <!-- Wrap your existing control element with a native link path -->
+
+
+                </nav>
+            </header>
+
+            <!-- VOUCHER TOP HEADER ROWS -->
+            <div class="booking-header">
+                <div>
+                    <h1>Sanctuary Confirmed • Your Journey Begins</h1>
+                    <p class="subtitle">A formal booking voucher and cryptographic key certificate have been dispatched.</p>
+                </div>
+                <div class="reference-pane">
+                    <p class="ref-label">BOOKING REFERENCE</p>
+                    <span class="booking-reference" id="copyRef" title="Click to copy">#HAV-89402</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Countdown Alert Banner -->
+            <div class="countdown-banner" id="countdownBanner"></div>
+
+            <!-- MODULE 2: SPLIT CONTENT BODY -->
+            <div class="card-split-body">
+
+                <!-- LEFT SIDE: PICTURE & CORE STAY IDENTIFICATION -->
+                <section class="left-pane">
+                    <!-- Hotel Highlight Elements Embedded inside a dark frame -->
+                    <div class="card dark-card">
+                        <h2>Monastero Santa Rosa</h2>
+                        <p class="location-tag">Conca dei Marini, Amalfi Coast, Italy</p>
+                        
+                        <div class="grid-2" style="margin-top: 20px;">
+                            <div>
+                                <strong class="meta-label">GUEST NAME</strong>
+                                <p class="meta-value">Elena Vance</p>
+                            </div>
+                            <div>
+                                <strong class="meta-label">SANCTUARY SUITE</strong>
+                                <p class="meta-value">Deluxe Sea View</p>
+                            </div>
+                        </div>
+
+                        <!-- Digital Key Component Inside Left Pane -->
+                        <div class="qr-wrapper">
+                            <canvas id="qrCode" class="qr-placeholder"></canvas>
+                            <div>
+                                <strong class="meta-label text-white">CONTACTLESS ARRIVAL KEY</strong>
+                                <p class="qr-subtext">Present upon arrival at the Portico Pergola</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Left Column Secondary Logistics Visual -->
+                    <img class="pane-hero-image" src="view.jpg" alt="Hotel Feature Room View">
+                </section>
+
+                <!-- RIGHT SIDE: LOGISTICS, ITEMIZATION & CONCIERGE -->
+                <aside class="right-pane">
+                    
+                    <!-- Arrival & Departure Card -->
+                    <div class="card">
+                        <h3>Arrival & Departure Logistics</h3>
+                        <div class="grid-2">
+                            <div>
+                                <strong class="meta-label">CHECK-IN</strong>
+                                <p class="meta-value">Monday, Oct 14, 2024</p>
+                                <small class="time-stamp">From 3:00 PM CEST</small>
+                            </div>
+                            <div>
+                                <strong class="meta-label">CHECK-OUT</strong>
+                                <p class="meta-value">Saturday, Oct 19, 2024</p>
+                                <small class="time-stamp">Until 12:00 PM CEST</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Itemized Folio Ledger Breakdown -->
+                    <div class="card">
+                        <h3>Itemized Folio Breakdown</h3>
+                        <div class="price-row">
+                            <span>5 Nights @ $780.00 (Deluxe Sea View)</span>
+                            <span>$3,900.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Cleaning & bespoke resort fees</span>
+                            <span>$150.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Estimated regional taxes</span>
+                            <span>$245.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Total Paid</span>
+                            <span>$4,145.00</span>
+                           
+                        </div>
+                        <a href="banking.html" style="text-decoration: none; display: block; width: 100%;">
+    <button class="btn" id="banking">banking details</button>
+</a>   
+                    </div>
+                      <!-- Direct Sanctuary Interactive Hub -->
+                    <div class="card">
+                        <h3>Direct Sanctuary Contact</h3>
+                        <p class="concierge-profile"><strong>Elena Moretti-Vance</strong><br>Head of Private Guest Hospitality</p>
+                        <button class="btn" id="msgConcierge">Message Concierge</button>
+                    </div>
+                    
+        </div> 
+                  
+                </aside>
+
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Dynamic Notification Toast Elements -->
+    <div id="toastNotification" class="toast">Action Complete</div>
+
+    <!-- CODE CONTROLLERS & GRAPHICS GENERATION -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Copy Booking Reference Clipboard Interaction
+            const copyBtn = document.getElementById("copyRef");
+            if (copyBtn) {
+                copyBtn.addEventListener("click", function() {
+                    const refText = copyBtn.textContent;
+                    navigator.clipboard.writeText(refText).then(() => {
+                        showToast("Booking reference copied to clipboard!");
+                    }).catch(err => {
+                        console.error("Failed to copy text: ", err);
+                    });
+                });
+            }
+
+            // 2. Concierge Messaging Interaction Trigger
+            const msgBtn = document.getElementById("msgConcierge");
+            if (msgBtn) {
+                msgBtn.addEventListener("click", function() {
+                    showToast("Connecting securely to Elena Moretti-Vance...");
+                    msgBtn.textContent = "Connecting...";
+                    msgBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        msgBtn.textContent = "Message Concierge";
+                        msgBtn.disabled = false;
+                    }, 3000);
+                });
+            }
+
+            // 3. Dynamic UI Component: Toast Notifications Helper
+            function showToast(message) {
+                const toast = document.getElementById("toastNotification");
+                if (toast) {
+                    toast.textContent = message;
+                    toast.classList.add("show");
+                    
+                    setTimeout(() => {
+                        toast.classList.remove("show");
+                    }, 3000);
+                }
+            }
+
+            // 4. Generate Mock QR Code Architecture on Canvas Elements
+            function generateMockQR() {
+                const canvas = document.getElementById("qrCode");
+                if (!canvas || !canvas.getContext) return;
+                const ctx = canvas.getContext("2d");
+                
+                canvas.width = 110;
+                canvas.height = 110;
+
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, 110, 110);
+
+                ctx.fillStyle = "#111111";
+                // Positional tracker matrix simulation blocks
+                ctx.fillRect(5, 5, 30, 30);    ctx.clearRect(12, 12, 16, 16);
+                ctx.fillRect(75, 5, 30, 30);   ctx.clearRect(82, 12, 16, 16);
+                ctx.fillRect(5, 75, 30, 30);   ctx.clearRect(12, 82, 16, 16);
+                
+                // Procedural micro barcode variations fill
+                for (let x = 5; x < 105; x += 8) {
+                    for (let y = 5; y < 105; y += 8) {
+                        if ((x < 40 && y < 40) || (x > 70 && y < 40) || (x < 40 && y > 70)) continue;
+                        if (Math.random() > 0.45) {
+                            ctx.fillRect(x, y, 6, 6);
+                        }
+                    }
+                }
+            }
+
+            // 5. Initialize layout properties
+            generateMockQR();
+            
+            const countdownBanner = document.getElementById("countdownBanner");
+            if (countdownBanner) {
+                countdownBanner.innerHTML = "✨ Your sanctuary experience unlocks in <strong>13 days</strong>. Complete your custom pre-arrival preferences.";
+            }
+        });
+        <!-- Combined UI update for your container stack -->
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Select the newly updated button element by its explicit ID
+    const bankingBtn = document.getElementById("banking-card");
+    
+    if (bankingBtn) {
+        bankingBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Check if the secure card detail sub-panel already exists
+            let existingPanel = document.getElementById("secure-banking-panel");
+            
+            if (!existingPanel) {
+                // Generate a structural vault matrix card dynamically below the button
+                const securePanel = document.createElement("div");
+                securePanel.id = "secure-banking-panel";
+                securePanel.style.marginTop = "15px";
+                securePanel.style.padding = "15px";
+                securePanel.style.background = "#f8f9fa";
+                securePanel.style.border = "1px dashed #d4af37"; // Vault accent gold
+                securePanel.style.borderRadius = "8px";
+                securePanel.style.fontSize = "0.85rem";
+                securePanel.style.animation = "fadeIn 0.3s ease-out";
+                
+                securePanel.innerHTML = `
+                    <div style="margin-bottom: 8px;">
+                        <strong style="color: #666; font-size: 0.7rem; display: block; letter-spacing: 0.5px;">ROUTING SWIFT / BIC</strong>
+                        <span style="font-family: monospace; font-weight: bold; color: #111;">HAVSIT22XXX</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666; font-size: 0.7rem; display: block; letter-spacing: 0.5px;">ESCROW ACCOUNT (IBAN)</strong>
+                        <span style="font-family: monospace; font-weight: bold; color: #111;">IT62 H 0306 9121 0000 0123 4567</span>
+                    </div>
+                `;
+                
+                // Append securely to the parent component hierarchy
+                bankingBtn.parentNode.appendChild(securePanel);
+                bankingBtn.innerText = "Hide Banking Details";
+                bankingBtn.classList.add("btn-secondary");
+            } else {
+                // Seamlessly toggle visibility state if it is already mounted
+                existingPanel.remove();
+                bankingBtn.innerText = "Banking Details";
+                bankingBtn.classList.remove("btn-secondary");
+            }
+        });
+    }
+});
+document.addEventListener("DOMContentLoaded", () => {
+    // Structural Payment Validation Framework
+    function validateLedgerInbound() {
+        const baseNightsPrice = 3900.00;
+        const resortFees = 150.00;
+        const regionalTaxes = 245.00;
+        const targetTotalPaid = 4145.00;
+
+        // Compute client-side verification hash total
+        const calculatedTotal = baseNightsPrice + resortFees + regionalTaxes;
+
+        if (calculatedTotal !== targetTotalPaid) {
+            console.error("⛔ Ledger Validation Error: System totals mismatch structural integrity parameters.");
+            return false;
+        }
+        
+        console.log("✅ Ledger Validation Complete: Inbound totals match perfectly ($" + calculatedTotal.toFixed(2) + ").");
+        return true;
+    }
+
+    // Intercept print commands or validate on action triggers
+    const bankingCardBtn = document.getElementById("banking-card");
+    if (bankingCardBtn) {
+        bankingCardBtn.addEventListener("click", (e) => {
+            // Run cryptographic ledger validation before exposing routing elements
+            if (!validateLedgerInbound()) {
+                e.stopImmediatePropagation();
+                alert("⚠️ Error: Payment voucher could not be verified securely. Please refresh or contact concierge.");
+            }
+        });
+    }
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const bankingBtn = document.getElementById("banking-card");
+    
+    if (bankingBtn) {
+        bankingBtn.addEventListener("click", (e) => {
+            e.preventDefault(); // Prevents unintended form submissions
+            
+            // Instantly transition the client frame straight to your page
+            window.location.href = "banking.html"; 
+        });
+    }
+});
+
+    </script>
+</body>
+</html>
+

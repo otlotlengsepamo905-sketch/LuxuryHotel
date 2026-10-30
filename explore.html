@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Stays Clone</title>
+    <link rel="stylesheet" href="structure.css">
+
+</head>
+<body>
+<script src="app.js" defer></script>
+<script src="https://kit.fontawesome.com/6a518496c2.js" crossorigin="anonymous"></script>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="logo"><img src="haven_stays_logo/screen.png" width="30">HOTEL BOOKING</div>
+        <nav class="nav-links">
+            <a href="home.html"></a>
+            <a href="#" class="active"></a>
+            <a href="payment.html"></a>
+            <a href="card.html"></a>
+        </nav> 
+        <div class="user-profile">
+            <i class="fa-solid fa-user"></i> otlotleng sepamo</div>
+    </header>
+     <!-- NEW: Top Search Bar Section -->
+    <div class="search-bar-container">
+        <form class="search-bar">
+            <div class="search-input-group"><i class="fa-solid fa-location-dot"></i>
+                <label for="location">
+                     Where</label>
+                <input type="text" id="location" placeholder="Search destinations" value="Amalfi Coast, Italy">
+            </div>
+            <div class="search-input-group">
+                <label for="checkin"><i class="fa-solid fa-calendar-days"></i>Check in</label>
+                <input type="date" id="checkin" value="2026-10-14">
+            </div>
+            <div class="search-input-group">
+                <label for="checkout"><i class="fa-solid fa-calendar-days"></i> Check out</label>
+                <input type="date" id="checkout" value="2026-10-19">
+            </div>
+            <div class="search-input-group">
+                <label for="guests"><i class="fa-solid fa-user-group"></i>Guests</label>
+                <input type="text" id="guests" placeholder="Add guests" value="2 Guests">
+            </div>
+            <button type="submit" class="search-submit-btn">
+                <i class="fa-solid fa-magnifying-glass-location"></i> <span>Search</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Sub-bar Configuration -->
+    <div class="search-summary">
+        <span>
+          <i class="fa-solid fa-location-dot"></i>  
+             Amalfi Coast, Italy • Oct 14-19 • 2 Guests</span>
+        <span class="sanctuary-count">48 Sanctuaries Available</span>
+    </div>
+
+  
+    <!-- Main Dynamic Layout Body -->
+    <main class="container">
+        
+        <!-- Left Side: Content & Listings -->
+        <section class="left-panel">
+            
+            <!-- Filter Bar Panel -->
+            <div class="filters">
+                <h3>Curated Filters</h3>
+                <div class="filter-group">
+                    <button class="btn active">All Tiers</button>
+                    <button class="btn">Private Villa</button>
+                    <button class="btn">Oceanfront Suite</button>
+                    <button class="btn">Heritage Palazzo</button>
+                </div>
+            </div>
+
+            <!-- Stays List Grid Container -->
+
+        </section>
+
+      <div class="listings">
+    <!-- Card 1 -->
+    <div class="hotel-card">
+        <div class="hotel-thumbnail">
+    <img src="room (3).jpg" alt="Casa Angelina" width="100%" height="220px">
+</div>
+
+        <div class="hotel-details">
+            <div class="card-header">
+                <span>Conca dei Marini</span>
+                <span class="rating"><i class="fa-solid fa-star"></i>
+                    4.98</span>
+            </div>
+            <h2>Monastero Santa Rosa Hotel & Spa</h2>
+            <p class="description">A 17th-century Dominican monastery meticulously restored with terraced gardens...</p>
+            <div class="card-footer">
+                <span class="price"><strong>R780</strong> / night</span>
+          <button class="book-btn" 
+    data-hotel="Monastero Santa Rosa Hotel & Spa"
+    data-price="780"
+    data-location="Conca dei Marini"
+    data-rating="4.98"
+    data-type="Private Villa">View room</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="hotel-card">
+       <div class="hotel-thumbnail">
+    <img src="images 5.jpg" alt="Casa Angelina" width="100%" height="220px">
+</div>
+        <div class="hotel-details">
+            <div class="card-header">
+                <span>Positano</span>
+                <span class="rating"><i class="fa-solid fa-star"></i>4.95</span>
+            </div>
+            <h2>Le Sirenuse Luxury Enclave</h2>
+            <p class="description">An aristocratic summer home turned legendary family-run refuge...</p>
+            <div class="card-footer">
+                <span class="price"><strong>R850</strong> / night</span>
+    <button class="book-btn" 
+  data-hotel="Le Sirenuse Luxury Enclave"
+  data-price="850"
+  data-location="Positano"
+  data-rating="4.95"
+  data-type="Heritage Palazzo">View room</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="hotel-card">
+       <div class="hotel-thumbnail">
+    <img src="images 6.jpg" alt="Casa Angelina" width="100%" height="220px">
+</div>
+
+        <div class="hotel-details">
+            <div class="card-header">
+                <span>Amalfi</span>
+                <span class="rating"><i class="fa-solid fa-star"></i> 4.91</span>
+            </div>
+            <h2>Hotel Santa Caterina</h2>
+            <p class="description">An Art Nouveau villa immersed in the beautiful scenery of the Amalfi Coast...</p>
+            <div class="card-footer">
+                <span class="price"><strong>R920</strong> / night</span>
+   <button class="book-btn" 
+  data-hotel="Hotel Santa Caterina"
+  data-price="920"
+  data-location="Amalfi"
+  data-rating="4.91"
+  data-type="Oceanfront Suite">View room</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="hotel-card">
+        <div class="hotel-thumbnail">
+    <img src="images 4.jpg" alt="Casa Angelina" width="100%" height="220px">
+</div>
+
+        <div class="hotel-details">
+            <div class="card-header">
+                <span>Ravello</span>
+                <span class="rating"><i class="fa-solid fa-star"></i> 4.96</span>
+            </div>
+            <h2>Caruso, A Belmond Hotel</h2>
+            <p class="description">A 11th-century palace set on a cliff edge with a world-famous infinity pool...</p>
+            <div class="card-footer">
+                <span class="price"><strong>R980</strong> / night</span>
+     <button class="book-btn"
+      data-hotel="Belmond Hotel Caruso"
+       data-price="1100" 
+       data-location="Ravello"
+        data-rating="4.97" 
+        data-type="Private Villa">View room</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="hotel-card">
+       <div class="hotel-thumbnail">
+    <img src="room (1).jpg" alt="Casa Angelina" width="100%" height="220px">
+</div>
+
+        <div class="hotel-details">
+            <div class="card-header">
+                <span>Sorrento</span>
+                <span class="rating"><i class="fa-solid fa-star"></i>4.89</span>
+            </div>
+            <h2>Grand Hotel Excelsior Vittoria</h2>
+            <p class="description">A historic luxury hotel perched on the cliffs overlooking the Gulf of Naples...</p>
+            <div class="card-footer">
+                <span class="price"><strong>R690</strong> / night</span>
+ <button class="book-btn"
+  data-hotel="Grand Hotel Excelsior Vittoria" 
+ data-price="1250"
+  data-location="Sorrento" 
+ data-rating="4.99" 
+ data-type="Oceanfront Suite">View room</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="hotel-card">
+        <div class="hotel-thumbnail">
+    <img src="room (3).jpg" alt="Casa Angelina" width="400">
+</div>
+        <div class="hotel-details">
+            <div class="card-header">
+                <span>Praiano</span>
+                <span class="rating"><i class="fa-solid fa-star"></i> 4.93</span>
+            </div>
+            <h2>Casa Angelina Boutique Sanctuary</h2>
+            <p class="description">A minimalist, cliffside retreat offering striking, unobstructed sunset views over the sea...</p>
+            <div class="card-footer">
+                <span class="price"><strong>R810</strong> / night</span>
+  <button class="book-btn" 
+  data-hotel="casa Angelina Boutique Sanctuary" 
+  data-price="980"
+   data-location="Praiano" 
+   data-rating="4.90" 
+   data-type="Heritage Palazzo">View room</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Copyright & Utility Bar -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Haven Stays Hospitality Group. All architectural rights reserved.</p>
+        <div class="footer-utility-links">
+            <a href="#">Sustainability Commitment</a>
+            <a href="#">Accessibility Notice</a>
+        </div>
+    </div>
+</footer>
+<script type="module">
+const hotelDetails = {
+  "Monastero Santa Rosa Hotel & Spa": { desc: "A 17th-century Dominican monastery meticulously restored with terraced gardens, infinity pool overlooking the sea, and luxury spa.", img: "https://images.unsplash.com/photo-1611892440504-42a792e24d32" },
+  "Le Sirenuse Luxury Enclave": { desc: "An aristocratic summer home turned legendary family-run refuge. Cliffside luxury with Michelin-star dining and iconic Positano views.", img: "https://images.unsplash.com/photo-1590490360182-c33d57733427" },
+  "Hotel Santa Caterina": { desc: "An Art Nouveau villa immersed in the beautiful scenery of the Amalfi Coast. Private beach club and exquisite gardens.", img: "https://images.unsplash.com/photo-1560448204-603b3fc33ddc" },
+  "Belmond Hotel Caruso": { desc: "An 11th-century palazzo perched 1,000ft above the sea with infinity pool and world-class Ravello views.", img: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461" },
+  "Il San Pietro di Positano": { desc: "Iconic Zodiac beach club, cliffside suites and legendary hospitality on the Amalfi Coast.", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" },
+  "Villa Treville": { desc: "Exclusive private villa retreat with private sea access and ultimate privacy in Positano.", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945" }
+};
+
+document.querySelectorAll(".book-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const hotel = btn.dataset.hotel;
+    const price = btn.dataset.price;
+    const location = btn.dataset.location;
+    const rating = btn.dataset.rating;
+    
+    localStorage.setItem("lastHotel", hotel);
+    localStorage.setItem("lastPrice", price);
+    localStorage.setItem("lastLocation", location);
+    localStorage.setItem("lastRating", rating);
+    localStorage.setItem("lastDesc", hotelDetails[hotel]?.desc || "");
+    localStorage.setItem("lastImg", hotelDetails[hotel]?.img || "");
+
+    window.location.href = `room-details.html?hotel=${encodeURIComponent(hotel)}&price=${price}`;
+  });
+});
+
+// CURATED FILTERS - Make them work!
+document.querySelectorAll(".filter-btn").forEach(f => {
+  f.addEventListener("click", () => {
+    const type = f.innerText;
+    document.querySelectorAll(".book-btn").forEach(cardBtn => {
+      const card = cardBtn.closest("div");
+      if(type === "All Tiers" || cardBtn.dataset.type === type) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+</script>
+    <script type="module" src="./db/db.js"></script>
+    </main>/
+
+</body>
+</html>

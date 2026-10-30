@@ -1,0 +1,586 @@
+/* ==========================================================================
+   1. Global Resets & Typography
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: rgb(83, 74, 80);
+    
+    color: #2e334b;
+    line-height: 1.6;
+}
+
+/* Common Button Styles */
+.btn, .btn-action {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #2d3436;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover, .btn-action:hover {
+    background-color: #f1f2f6;
+    border-color: #b2bec3;
+}
+
+.btn.active {
+    background-color: #2d3436;
+    color: #fff;
+    border-color: #2d3436;
+}
+
+/* ==========================================================================
+   2. Header Navigation
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #636e72;
+    text-transform: capitalize;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: #2d3436;
+    border-bottom: 2px solid #2d3436;
+    padding-bottom: 4px;
+}
+
+.user-profile {
+    font-weight: 500;
+    color: #2d3436;
+}
+
+/* ==========================================================================
+   3. Sub-bar Configuration
+   ========================================================================== */
+.search-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4%;
+    background-color: #ffffff;
+    border-top: 1px solid #f1f2f6;
+    border-bottom: 1px solid #dfe6e9;
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.sanctuary-count {
+    font-weight: 600;
+    color: #2d3436;
+}
+
+/* ==========================================================================
+   4. Main Dynamic Two-Column Layout
+   ========================================================================== */
+.container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 4%;
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Fixed sidebar, flexible content grid */
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Left Side: Sidebar Filters */
+.left-panel {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #dfe6e9;
+    position: sticky;
+    top: 90px; /* Stays fixed inline when scrolling */
+}
+
+.filters h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #2d3436;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.filter-group .btn {
+    text-align: left;
+    width: 100%;
+}
+
+/* Right Side: Stays List Grid Container */
+.listings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ==========================================================================
+   5. Hotel Card Component
+   ========================================================================== */
+.hotel-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #dfe6e9;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hotel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(212, 207, 207, 0.05);
+}
+
+.hotel-thumbnail {
+    height: 220px;
+    width: 100%;
+    transition: opacity 0.2s;
+}
+
+.hotel-card:hover .hotel-thumbnail {
+    opacity: 0.9;
+}
+
+.hotel-details {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #636e72;
+    margin-bottom: 0.5rem;
+}
+
+.rating {
+    color: #2d3436;
+    font-weight: 600;
+}
+
+.hotel-details h2 {
+    font-size: 1.2rem;
+    color: #2d3436;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* Truncates long text gracefully */
+}
+
+.card-footer {
+    margin-top: auto; /* Pushes footer to the bottom of the card */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f2f6;
+}
+
+.price {
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.price strong {
+    font-size: 1.15rem;
+    color: #2d3436;
+}
+
+.btn-class {
+    background-color: #2d3436;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-class {
+    background-color: #000000;
+}
+.view-room-btn{
+background-color: #656175;
+color: #b2bec3;
+border-radius:2%;
+
+}
+/* ==========================================================================
+   6. Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 1fr; /* Stack sidebar on top of cards for tablets */
+        gap: 1.5rem;
+    }
+    
+    .left-panel {
+        position: relative;
+        top: 0;
+    }
+
+    .filter-group {
+        flex-direction: row;
+        overflow-x: auto; /* Allow horizontal swiping of filters on small screens */
+        padding-bottom: 0.5rem;
+    }
+
+    .filter-group .btn {
+        width: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .search-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+ /* ==========================================================================
+   Haven Stays Wide Horizontal Footer Layout
+   ========================================================================== */
+
+.footer {
+    width: 550%;
+    min-height:  80px; /* Sets the precise structural layout height constraint */
+    background-color: #f7f4f0; /* Crisp premium warm tone background */
+    border-top: 1px solid #e8e2da;
+    height: 250px;
+    padding: 5rem 4% 3rem 4%;
+    box-sizing: border-box;
+    font-family: inherit;
+    color: #2d2a26;
+}
+
+/* Forces elements into a horizontal ribbon distribution */
+.footer-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    /* Allocates expansive left width for brand metrics, split sizing for grid columns */
+    grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr;
+    gap: 4.5rem;
+    align-items: start;
+}
+
+/* Brand Metric Stack (Left side) */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-brand .footer-logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    color: #1a1816;
+}
+
+.brand-desc {
+    color: #706a61;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 340px; /* Constrains content wrap gracefully along the horizontal line */
+    margin-bottom: 2rem;
+}
+
+/* Minimalist Inline Subscription Field */
+.footer-newsletter {
+    width: 100%;
+    max-width: 320px;
+}
+
+.footer-newsletter h3 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #1a1816;
+    margin-bottom: 0.85rem;
+}
+
+.newsletter-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #1a1816; /* Underline input interface */
+    padding-bottom: 0.4rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.85rem;
+    color: #1a1816;
+    padding: 0.25rem 0;
+}
+
+.newsletter-form input:focus {
+    outline: none;
+}
+
+.newsletter-form input::placeholder {
+    color: #a39c91;
+}
+
+.btn-subscribe {
+    background: transparent;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1a1816;
+    cursor: pointer;
+    padding-left: 1rem;
+    transition: opacity 0.2s ease;
+}
+
+.btn-subscribe:hover {
+    opacity: 0.6;
+}
+
+/* Category Grid Pillars */
+.footer-col {
+    display: flex;
+    flex-direction:column;
+    margin: right 100px ;
+    
+
+}
+
+.footer-col h3 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #1a1816;
+    margin-bottom: 1.5rem;
+    margin-right: 100%;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.85rem;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #706a61;
+    font-size: 0.82rem;
+    transition: color 0.15s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #1a1816;
+}
+
+/* ==========================================================================
+   Bottom Horizontal Utility Bar
+   ========================================================================== */
+.footer-bottom {
+    width: 100%;
+    max-width: 1600px;
+    margin: 5rem auto 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e8e2da;
+    display: flex;
+    justify-content: space-between; /* Spreads legal text across horizontal spectrum */
+    align-items: center;
+}
+
+.footer-bottom p {
+    font-size: 0.75rem;
+    color: #a39c91;
+}
+
+.footer-utility-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-utility-links a {
+    font-size: 0.75rem;
+    color: #a39c91;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.footer-utility-links a:hover {
+    color: #1a1816;
+}
+.search-bar-container {
+    background-color: #ffffff;
+    padding: 15px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.search-bar {
+    display: flex;
+    background:rgb(224, 221, 217);
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 6px 12px 6px 24px;
+    align-items: center;
+    max-width: 850px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.search-input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 16px;
+    border-right: 1px solid #eeeeee;
+}
+
+.search-input-group:last-of-type {
+    border-right: none;
+}
+
+.search-input-group label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #333333;
+    margin-bottom: 2px;
+}
+
+.search-input-group input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #666666;
+    background: transparent;
+    padding: 2px 0;
+}
+
+.search-submit-btn {
+    background-color: #140e30; /* Dark premium style matching your UI */
+    color: rgba(255, 255, 255, 0.849);
+    border: none;
+    border-radius: 24px;
+    padding: 12px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.search-submit-btn:hover {
+    background-color: #c22222;
+}
+/* Make each section highlight and change the mouse cursor on hover */
+.search-input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px 24px;       /* Slightly larger hit target */
+    border-right: 1px solid #bb6b6b;
+    cursor: pointer;          /* Shows the clickable hand pointer */
+    border-radius: 30px;      /* Smooth highlight corners */
+    transition: background-color 0.15s ease;
+}
+
+/* Subtle background tint when hovering anywhere over the section */
+.search-input-group:hover {
+    background-color: #c2b8b8;
+}
+
+/* Ensure the inputs don't intercept clicks weirdly */
+.search-input-group input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #666666;
+    background: transparent;
+    padding: 2px 0;
+    cursor: pointer; /* Keeps cursor consistent */
+    width: 100%;
+}
+
+.book-btn {
+  background: #5a5454;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.book-btn:hover {
+  background: #333;
+} 

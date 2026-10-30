@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Banking Details</title>
+    <link rel="stylesheet" href="banking.css">
+    <script src="banking.js" defer></script>
+     <script src="https://kit.fontawesome.com/6a518496c2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+<div class="gateway-container">
+     <a href="room-details.html" class="nav-link"><i class="fa-solid fa-arrow-left-long"></i></a>
+    <div class="gateway-header">
+        <img src="haven_stays_logo/screen.png" width="35" alt="Logo">
+        <h2>HOTEL BOOKING</h2>
+        <p>Booking Reference: #HAV-89402</p>
+    </div>
+
+    <div class="amount-badge">
+        <span style="font-size: 0.8rem; font-weight: 500; display:block; color: var(--text-muted); margin-bottom: 4px;">TOTAL AMOUNT DUE</span>
+        R4,145.00 USD
+    </div>
+<!-- DYNAMIC GATEWAY VIEWPORTS -->
+<div id="cardPaymentViewport">
+    <form id="paymentForm">
+        <div class="form-group">
+            <label for="cardName">Cardholder Name<i class="fa-regular fa-credit-card"></i></label>
+            <input type="text" id="cardName" class="form-input" placeholder="Elena Vance" required>
+            
+        </div>
+
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" class="form-input" maxlength="19" placeholder="•••• •••• •••• ••••" required>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label for="cardExpiry">Expiration Date</label>
+                <input type="text" id="cardExpiry" class="form-input" placeholder="MM/YY" maxlength="5" required>
+            </div>
+            <div class="form-group">
+                <label for="cardCvc">Security Code (CVC)</label>
+                <input type="password" id="cardCvc" class="form-input" placeholder="•••" maxlength="4" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-pay" id="submitPaymentBtn">Authorize Credit Card Payment</button>
+    </form>
+</div>
+
+<div id="wirePaymentViewport" style="display: none;">
+    <div style="background: #fafafa; border: 1px dashed var(--accent-gold); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <p style="margin: 0 0 15px 0; font-size: 0.9rem; color: var(--text-dark); font-weight: 500;">
+            Please execute an immediate SEPA / SWIFT escrow transfer using these authenticated credentials:
+        </p>
+        
+        <div style="margin-bottom: 12px;">
+            <strong style="color: var(--text-muted); font-size: 0.7rem; display: block; letter-spacing: 0.5px; text-transform: uppercase;">Beneficiary Institution</strong>
+            <span style="font-family: monospace; font-weight: bold; color: var(--text-dark); font-size: 0.95rem;">Haven Stays International SA</span>
+        </div>
+        
+        <div style="margin-bottom: 12px;">
+            <strong style="color: var(--text-muted); font-size: 0.7rem; display: block; letter-spacing: 0.5px; text-transform: uppercase;">ROUTING SWIFT / BIC</strong>
+            <span style="font-family: monospace; font-weight: bold; color: var(--text-dark); font-size: 0.95rem;">HAVSIT22XXX</span>
+        </div>
+        
+        <div style="margin-bottom: 12px;">
+            <strong style="color: var(--text-muted); font-size: 0.7rem; display: block; letter-spacing: 0.5px; text-transform: uppercase;">ESCROW ACCOUNT (IBAN)</strong>
+            <span style="font-family: monospace; font-weight: bold; color: var(--text-dark); font-size: 0.95rem;">IT62 H 0306 9121 0000 0123 4567</span>
+        </div>
+
+        <div>
+            <strong style="color: var(--text-muted); font-size: 0.7rem; display: block; letter-spacing: 0.5px; text-transform: uppercase;">Payment Reference ID (Required)</strong>
+            <span style="font-family: monospace; font-weight: bold; color: maroon; font-size: 1rem;">#HAV-89402</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="wireReceipt">Upload Transaction Ledger / Proof of Wire (Optional)</label>
+        <input type="file" id="wireReceipt" class="form-input" style="padding: 8px;">
+    </div>
+
+    <button type="button" class="btn-pay" id="confirmWireBtn" style="background: #111;">I Have Sent the Wire Funds</button>
+    <a href="room-details.html" style="display: block; text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">← Pay via Credit Card instead</a>
+</div>
+
+</div>
+
+</body>
+</html>
+                
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL booking - Sign Up</title>
+    <!-- EXTERNAL STYLESHEET LINK -->
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://fontawesome.com" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="workspace-wrapper"> 
+    <!-- THE MASTER CARD BOX --> 
+    <main class="unified-card-box"> 
+        <!-- MODULE 1: TOP NAVIGATION BAR --> 
+        <header class="card-header-nav"> 
+            <nav class="centered-nav"> 
+                <a href="#home.html" class="nav-link"></a> 
+                <a href="#explore.html" class="nav-link"></a> 
+                <a href="#payment" class="nav-link"></a> 
+            </nav> 
+            <button class="theme-btn" id="theme-toggle">Toggle Theme</button> 
+        </header> 
+
+        <!-- MODULE 2: SPLIT CONTENT BODY --> 
+        <div class="card-split-body"> 
+            <!-- LEFT COLUMN: PICTURE DISPLAY & BRANDING --> 
+            <section class="left-pane"> 
+                <div class="left-content-wrapper">
+                    <div class="brand-branding"> 
+                        <img src="haven_stays_logo/screen.png" width="30" alt="Logo"> 
+                        <h1>HOTEL BOOKING</h1> 
+                    </div> 
+                    <p class="welcome-text">WELCOME TO OUR PAGE</p> 
+                    <img class="pane-hero-image" src="view.jpg" alt="Hotel Feature Room View"> 
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: INTERACTIVE SIGN UP DETAILS --> 
+            <aside class="right-pane" id="contact"> 
+                <h3>Sign Up Details</h3> 
+                <form id="interactive-form"> 
+                    <div class="form-group"> 
+                        <label for="username">Name</label> 
+                        <!-- Fixed: Changed ID to 'name' to align seamlessly with auth selectors -->
+                        <input type="text" id="name" required placeholder="otlotleng"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="email">Email Address</label> 
+                        <input type="email" id="email" required placeholder="otlotleng@gmail.com"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="password">Password</label> 
+                        <input type="password" id="password" required placeholder="••••••••"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="confirmpassword">Confirm Password</label> 
+                        <input type="password" id="confirmpassword" required placeholder="••••••••"> 
+                    </div> 
+                    
+                    <div class="form-checkbox-row">
+                        <input type="checkbox" id="terms-consent" required>
+                        <label for="terms-consent">I agree to the Terms & Conditions</label>
+                    </div>
+
+                    <!-- Placeholder Container for validation feedback messages -->
+                    <div id="form-feedback" style="margin-bottom: 15px; font-weight: bold;"></div>
+
+                    <!-- Fixed: Changed button to type="submit" and removed anchor link tag wrap -->
+                    <button type="submit" class="submit-btn">signup</button> 
+                    
+                    <div style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
+                        <span>Already have an account? </span>
+                        <a href="login.html" style="color: #0066cc; text-decoration: underline;">Log In here</a>
+                    </div>
+
+                    <div class="social-icons" style="margin-top: 20px;">
+                        <i class="fa-brands fa-google"></i> 
+                        <i class="fa-brands fa-square-whatsapp"></i> 
+                        <i class="fa-brands fa-instagram"></i> 
+                    </div>
+                </form> 
+            </aside> 
+        </div> 
+    </main> 
+</div> 
+
+<!-- Standard theme controller script block -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+            });
+        }
+    });
+</script>
+
+<!-- The single production script handling form interaction rules -->
+<script type="module" src="./auth/signup.js"></script>
+
+</body> 
+</html>

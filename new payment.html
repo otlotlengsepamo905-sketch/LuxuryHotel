@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Stays - Operations HQ</title>
+    <link rel="stylesheet" href="payment.css">
+    <!-- Styles for the newly added sections (keeps working even if payment.css lacks them) -->
+    <style>
+        .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 20px 0; }
+        .toolbar input, .toolbar select { padding: 9px 12px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 14px; }
+        .toolbar input { flex: 1; min-width: 200px; }
+        .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 24px 0; }
+        .panel { background: #fff; border: 1px solid #e4e7ec; border-radius: 12px; padding: 18px; }
+        .panel h3 { margin: 0 0 10px; font-size: 16px; }
+        .panel ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7; }
+        .mini-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .mini-table th, .mini-table td { text-align: left; padding: 8px 4px; border-bottom: 1px solid #eef0f3; }
+        .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #eef2ff; color: #3730a3; margin: 2px 2px 0 0; }
+        .occ-bar { height: 6px; background: #eef0f3; border-radius: 4px; margin-top: 4px; width: 110px; }
+        .occ-bar span { display: block; height: 100%; background: #2e7d32; border-radius: 4px; }
+        .status-indicator.limited { color: #b45309; }
+        .status-indicator.sold { color: #b42318; }
+        .status-indicator.maintenance { color: #667085; }
+        .row-actions button { padding: 5px 10px; font-size: 12px; border: 1px solid #d0d5dd; background: #fff; border-radius: 6px; cursor: pointer; margin-right: 4px; }
+        .table-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; font-size: 13px; color: #667085; }
+        .old-price { text-decoration: line-through; color: #98a2b3; font-size: 13px; }
+        .data-table { width: 100%; }
+    </style>
+</head>
+<body>
+<script src="payment.js" defer></script>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo"><img src="haven_stays_logo/screen.png" width="30" alt="Haven Stays logo">
+            <h2>HOTEL BOOKING</h2>
+            <small>OPERATIONS HQ</small>
+        </div>
+        <nav class="vertical-nav-container menu">
+            <div class="nav-box">
+                <span class="nav-label">home</span>
+                <a href="home.html" class="nav-btn">Go Home</a>
+            </div>
+            <div class="nav-box">
+                <span class="nav-label">explore</span>
+                <a href="explore.html" class="nav-btn">Discover</a>
+            </div>
+            <div class="nav-box">
+                <span class="nav-label">payment</span>
+                <a href="payment.html" class="nav-btn">Pay Now</a>
+            </div>
+            <div class="nav-box">
+                <span class="nav-label">card</span>
+                <a href="card.html" class="nav-btn">View Card</a>
+            </div>
+        </nav>
+        <div class="status">System Live</div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- HEADER -->
+        <header class="header">
+            <div>
+                <span class="breadcrumb">OPERATIONAL COMMAND / ROOM INVENTORY &amp; PRICING</span>
+                <h1>Sanctuary Inventory &amp; Live Pricing Engine</h1>
+                <p>Manage room categories, real-time availability states, surge multipliers, and seasonal rate allocations.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary">Bulk Rate Adjustments</button>
+                <button class="btn btn-primary">+ Add New Room / Suite</button>
+            </div>
+        </header>
+
+        <!-- SELECTED STAY (filled from the "View room" click on explore.html) -->
+        <section class="panel" id="bookingSummary" style="margin:20px 0; display:none;">
+            <h3>Your Selected Stay</h3>
+            <table class="mini-table">
+                <tbody>
+                    <tr><td>Hotel</td><td id="sumHotel">-</td></tr>
+                    <tr><td>Check in</td><td id="sumCheckin">-</td></tr>
+                    <tr><td>Check out</td><td id="sumCheckout">-</td></tr>
+                    <tr><td>Guests</td><td id="sumGuests">-</td></tr>
+                    <tr><td>Price per night</td><td id="sumPrice">-</td></tr>
+                    <tr><td>Nights</td><td id="sumNights">-</td></tr>
+                    <tr><td><strong>Total</strong></td><td><strong id="sumTotal">-</strong></td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:14px;">
+                <a href="card.html" class="btn btn-primary" id="payNowBtn" style="text-decoration:none; display:inline-block;">Continue to Card Payment</a>
+                <a href="explore.html" class="btn btn-secondary" style="text-decoration:none; display:inline-block;">Back to Stays</a>
+            </p>
+        </section>
+
+        <!-- METRICS ROW -->
+        <section class="metrics-grid">
+            <div class="card">
+                <span class="card-title">TOTAL CATALOG</span>
+                <h3>148 Units</h3>
+                <p>Across 48 curated sanctuaries</p>
+            </div>
+            <div class="card">
+                <span class="card-title">ACTIVE BOOKABLE</span>
+                <h3>92.4%</h3>
+                <p>Available &amp; instant booking on direct</p>
+            </div>
+            <div class="card">
+                <span class="card-title">ADR BENCHMARK</span>
+                <h3>R840/nt</h3>
+                <p>Base blended yield portfolio-wide</p>
+            </div>
+            <div class="card">
+                <span class="card-title">OCCUPANCY (30 DAYS)</span>
+                <h3>78.6%</h3>
+                <p>Up 4.2% versus previous period</p>
+            </div>
+            <div class="card">
+                <span class="card-title">REVPAR</span>
+                <h3>R660</h3>
+                <p>Revenue per available room</p>
+            </div>
+            <div class="card highlight-card">
+                <span class="card-title">ACTIVE ALGORITHMIC SURGE</span>
+                <h3>+15% Active</h3>
+                <p>Autumn Foliage Peak Allocation</p>
+            </div>
+        </section>
+
+        <!-- FILTER TOOLBAR -->
+        <section class="toolbar">
+            <input type="search" id="roomSearch" placeholder="Search rooms, properties or locations...">
+            <select id="categoryFilter">
+                <option value="">All categories</option>
+                <option>Suite</option>
+                <option>Deluxe</option>
+                <option>Standard</option>
+                <option>Family</option>
+            </select>
+            <select id="stateFilter">
+                <option value="">All inventory states</option>
+                <option>Available</option>
+                <option>Limited</option>
+                <option>Critical</option>
+                <option>Sold Out</option>
+                <option>Maintenance</option>
+            </select>
+        </section>
+
+        <!-- TABLE SECTION -->
+        <section class="table-section">
+            <div class="table-header">
+                <h3>Configured Suites <span class="badge">10 displayed</span></h3>
+            </div>
+            <table class="data-table" id="roomsTable">
+                <thead>
+                    <tr>
+                        <th>ROOM &amp; SUITE DETAILS</th>
+                        <th>CATEGORY &amp; SPACE</th>
+                        <th>AMENITIES</th>
+                        <th>OCCUPANCY</th>
+                        <th>ACTIVE BASE / SURGE</th>
+                        <th>INVENTORY STATE</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Deluxe Sea View Suite</strong><br><small>Monastero Santa Rosa • Amalfi Coast</small></td>
+                        <td>Cliffside Suite<br><small>King Bed • Up to 2 Guests • 45 m²</small></td>
+                        <td><span class="tag">Sea view</span><span class="tag">Balcony</span><span class="tag">Wi-Fi</span><span class="tag">Breakfast</span></td>
+                        <td>82%<div class="occ-bar"><span style="width:82%"></span></div></td>
+                        <td><strong>R920</strong> <span class="old-price">R800</span></td>
+                        <td><span class="status-indicator available">Available • 3 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Monastery Heritage Suite</strong><br><small>Monastero Santa Rosa • Amalfi Coast</small></td>
+                        <td>Historic Salon<br><small>Super King • 2 Guests • 60 m²</small></td>
+                        <td><span class="tag">Historic</span><span class="tag">Lounge area</span><span class="tag">Wi-Fi</span><span class="tag">Minibar</span></td>
+                        <td>96%<div class="occ-bar"><span style="width:96%"></span></div></td>
+                        <td><strong>R1,150</strong> <span class="old-price">R1,000</span></td>
+                        <td><span class="status-indicator critical">Critical Scarcity • 1 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Garden Terrace Room</strong><br><small>Villa Verde • Tuscany</small></td>
+                        <td>Deluxe Room<br><small>Queen Bed • 2 Guests • 32 m²</small></td>
+                        <td><span class="tag">Garden</span><span class="tag">Terrace</span><span class="tag">Wi-Fi</span></td>
+                        <td>71%<div class="occ-bar"><span style="width:71%"></span></div></td>
+                        <td><strong>R690</strong> <span class="old-price">R600</span></td>
+                        <td><span class="status-indicator available">Available • 6 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vineyard Family Suite</strong><br><small>Villa Verde • Tuscany</small></td>
+                        <td>Family Suite<br><small>King + 2 Singles • Up to 4 Guests • 55 m²</small></td>
+                        <td><span class="tag">Kitchenette</span><span class="tag">Vineyard view</span><span class="tag">Wi-Fi</span><span class="tag">Parking</span></td>
+                        <td>88%<div class="occ-bar"><span style="width:88%"></span></div></td>
+                        <td><strong>R1,265</strong> <span class="old-price">R1,100</span></td>
+                        <td><span class="status-indicator limited">Limited • 2 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lakeside Standard Room</strong><br><small>Lago Serena Lodge • Lake Como</small></td>
+                        <td>Standard Room<br><small>Double Bed • 2 Guests • 24 m²</small></td>
+                        <td><span class="tag">Lake view</span><span class="tag">Wi-Fi</span><span class="tag">Breakfast</span></td>
+                        <td>64%<div class="occ-bar"><span style="width:64%"></span></div></td>
+                        <td><strong>R575</strong> <span class="old-price">R500</span></td>
+                        <td><span class="status-indicator available">Available • 9 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lakeside Panorama Suite</strong><br><small>Lago Serena Lodge • Lake Como</small></td>
+                        <td>Panorama Suite<br><small>King Bed • 3 Guests • 50 m²</small></td>
+                        <td><span class="tag">Panoramic</span><span class="tag">Jacuzzi</span><span class="tag">Wi-Fi</span><span class="tag">Butler</span></td>
+                        <td>100%<div class="occ-bar"><span style="width:100%"></span></div></td>
+                        <td><strong>R1,380</strong> <span class="old-price">R1,200</span></td>
+                        <td><span class="status-indicator sold">Sold Out • 0 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Waitlist</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Old Town Deluxe Room</strong><br><small>Casa Antica • Kimberley</small></td>
+                        <td>Deluxe Room<br><small>Queen Bed • 2 Guests • 30 m²</small></td>
+                        <td><span class="tag">Air-con</span><span class="tag">Wi-Fi</span><span class="tag">Secure parking</span></td>
+                        <td>69%<div class="occ-bar"><span style="width:69%"></span></div></td>
+                        <td><strong>R805</strong> <span class="old-price">R700</span></td>
+                        <td><span class="status-indicator available">Available • 5 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diamond Executive Suite</strong><br><small>Casa Antica • Kimberley</small></td>
+                        <td>Executive Suite<br><small>King Bed • 2 Guests • 48 m²</small></td>
+                        <td><span class="tag">Work desk</span><span class="tag">Lounge</span><span class="tag">Wi-Fi</span><span class="tag">Breakfast</span></td>
+                        <td>85%<div class="occ-bar"><span style="width:85%"></span></div></td>
+                        <td><strong>R1,035</strong> <span class="old-price">R900</span></td>
+                        <td><span class="status-indicator limited">Limited • 2 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coastal Budget Room</strong><br><small>Baia Azzurra • Amalfi Coast</small></td>
+                        <td>Standard Room<br><small>Twin Beds • 2 Guests • 20 m²</small></td>
+                        <td><span class="tag">Wi-Fi</span><span class="tag">Shared terrace</span></td>
+                        <td>58%<div class="occ-bar"><span style="width:58%"></span></div></td>
+                        <td><strong>R460</strong> <span class="old-price">R400</span></td>
+                        <td><span class="status-indicator available">Available • 11 left</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Rates</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cypress Villa Suite</strong><br><small>Baia Azzurra • Amalfi Coast</small></td>
+                        <td>Villa Suite<br><small>King Bed • 4 Guests • 70 m²</small></td>
+                        <td><span class="tag">Private pool</span><span class="tag">Kitchen</span><span class="tag">Wi-Fi</span></td>
+                        <td>0%<div class="occ-bar"><span style="width:0%"></span></div></td>
+                        <td><strong>R1,725</strong> <span class="old-price">R1,500</span></td>
+                        <td><span class="status-indicator maintenance">Maintenance • Back 02 Nov</span></td>
+                        <td class="row-actions"><button>Edit</button><button>Reopen</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-footer">
+                <span>Showing 10 of 148 units</span>
+                <span>Prices in ZAR per night • Surge of +15% applied to current base</span>
+            </div>
+        </section>
+
+        <!-- EXTRA DETAIL PANELS -->
+        <section class="panel-grid">
+            <div class="panel">
+                <h3>Seasonal Rate Allocations</h3>
+                <table class="mini-table">
+                    <thead><tr><th>Season</th><th>Dates</th><th>Multiplier</th></tr></thead>
+                    <tbody>
+                        <tr><td>Autumn Foliage Peak</td><td>01 Oct – 15 Nov</td><td>+15%</td></tr>
+                        <tr><td>Festive Season</td><td>15 Dec – 05 Jan</td><td>+30%</td></tr>
+                        <tr><td>Winter Low</td><td>01 Jun – 31 Aug</td><td>-10%</td></tr>
+                        <tr><td>Standard</td><td>All other dates</td><td>Base rate</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel">
+                <h3>Pricing Rules &amp; Policies</h3>
+                <ul>
+                    <li>Surge applies automatically when availability drops below 20%</li>
+                    <li>Weekend uplift of +8% on Friday and Saturday nights</li>
+                    <li>Minimum stay of 2 nights during peak season</li>
+                    <li>Free cancellation up to 48 hours before check-in</li>
+                    <li>Check-in from 14:00 • Check-out by 10:00</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h3>Recent Activity</h3>
+                <ul>
+                    <li>Rate updated: Monastery Heritage Suite → R1,150</li>
+                    <li>Lakeside Panorama Suite marked Sold Out</li>
+                    <li>Cypress Villa Suite sent to maintenance</li>
+                    <li>New booking: Vineyard Family Suite (3 nights)</li>
+                    <li>Surge multiplier set to +15% by system</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Fill the booking summary from the room clicked on explore.html
+        (function () {
+            var p = new URLSearchParams(window.location.search);
+            var hotel = p.get('hotel');
+            var price = parseFloat(p.get('price'));
+            if (!hotel || isNaN(price)) return;
+
+            var checkin = p.get('checkin');
+            var checkout = p.get('checkout');
+            var guests = p.get('guests') || '2 Guests';
+            var nights = 1;
+            if (checkin && checkout) {
+                var diff = (new Date(checkout) - new Date(checkin)) / 86400000;
+                if (diff > 0) nights = diff;
+            }
+            var total = price * nights;
+
+            document.getElementById('sumHotel').textContent = hotel;
+            document.getElementById('sumCheckin').textContent = checkin || '-';
+            document.getElementById('sumCheckout').textContent = checkout || '-';
+            document.getElementById('sumGuests').textContent = guests;
+            document.getElementById('sumPrice').textContent = 'R' + price.toLocaleString();
+            document.getElementById('sumNights').textContent = nights;
+            document.getElementById('sumTotal').textContent = 'R' + total.toLocaleString();
+            document.getElementById('bookingSummary').style.display = 'block';
+
+            // Pass the booking on to the card page
+            document.getElementById('payNowBtn').href = 'card.html?hotel=' + encodeURIComponent(hotel) +
+                '&total=' + total + '&nights=' + nights;
+        })();
+    </script>
+
+    <script>
+        // Simple client-side filtering for the rooms table
+        (function () {
+            var search = document.getElementById('roomSearch');
+            var category = document.getElementById('categoryFilter');
+            var state = document.getElementById('stateFilter');
+            var rows = document.querySelectorAll('#roomsTable tbody tr');
+
+            function applyFilters() {
+                var q = search.value.toLowerCase();
+                var c = category.value.toLowerCase();
+                var s = state.value.toLowerCase();
+                rows.forEach(function (row) {
+                    var text = row.textContent.toLowerCase();
+                    var cells = row.cells;
+                    var matchQ = !q || text.indexOf(q) > -1;
+                    var matchC = !c || cells[1].textContent.toLowerCase().indexOf(c) > -1;
+                    var matchS = !s || cells[5].textContent.toLowerCase().indexOf(s) > -1;
+                    row.style.display = (matchQ && matchC && matchS) ? '' : 'none';
+                });
+            }
+            [search, category, state].forEach(function (el) {
+                el.addEventListener('input', applyFilters);
+                el.addEventListener('change', applyFilters);
+            });
+        })();
+    </script>
+</body>
+</html>
